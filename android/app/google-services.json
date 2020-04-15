@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "942169859640",
+    "firebase_url": "https://deals-on-bills-e34b9.firebaseio.com",
+    "project_id": "deals-on-bills-e34b9",
+    "storage_bucket": "deals-on-bills-e34b9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:942169859640:android:57f8cb63e0bafbc216e8cd",
+        "android_client_info": {
+          "package_name": "com.example.dob"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "942169859640-e93eifpbdpo41sn6t83aa72h0bjapas1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dob",
+            "certificate_hash": "882d2db2b7910171d01c5d5f5079a93347f337b8"
+          }
+        },
+        {
+          "client_id": "942169859640-omv2eeauf0ai70p6dudtnr92cpdmkavc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCL5JDZ5S-gjjbIXxKvvQx7tpoLFrCbl3M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "942169859640-omv2eeauf0ai70p6dudtnr92cpdmkavc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
