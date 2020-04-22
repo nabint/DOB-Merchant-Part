@@ -15,13 +15,13 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Text('Login',style: TextStyle(color: Colors.black),),
-      ),
+      
       body: BlocProvider<LoginBloc>(
         create: (context) => LoginBloc(authRepository: _authRepository),
-        child: LoginForm(authRepository: _authRepository),
+        child: Padding(
+          padding: const EdgeInsets.only(top:10.0),
+          child: LoginForm(authRepository: _authRepository),
+        ),
       ),
     );
   }

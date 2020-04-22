@@ -2,6 +2,7 @@ import 'package:dob/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:dob/pages/createnewoffer.dart';
 import 'package:dob/pages/profiledetail.dart';
 import 'package:dob/scoped-models/products.dart';
+import 'package:dob/widgets/navigationeffects.dart';
 import 'package:dob/widgets/your_offers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,8 +23,8 @@ class HomeScreen extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          onPressed: () => Navigator.push(context,
-              MaterialPageRoute(builder: (context) => CreateNewOffer())),
+          onPressed: () => Navigator.push(
+              context, SlideUpwardsRoute(page: CreateNewOffer())),
           child: Text(
             'Add New Offer',
             style: TextStyle(color: Colors.white, fontSize: 20.0),
@@ -32,7 +33,6 @@ class HomeScreen extends StatelessWidget {
       );
     }
 
-    // TODO: implement build
     return ScopedModelDescendant<Products>(
         builder: (BuildContext context, Widget child, Products model) {
       return Scaffold(
@@ -47,8 +47,8 @@ class HomeScreen extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => ProfileDetail(),
+                SlideRightRoute(
+                  page: ProfileDetail(),
                 ),
               );
             },
@@ -76,16 +76,14 @@ class HomeScreen extends StatelessWidget {
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () => Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) => CreateNewOffer(),
+            SlideUpwardsRoute(
+              page: CreateNewOffer(),
             ),
           ),
           label: Text("Add New Offer"),
           icon: Icon(Icons.add),
         ),
         body: ListView(
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          // crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
               padding:
@@ -114,13 +112,18 @@ class HomeScreen extends StatelessWidget {
                     children: <Widget>[
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.1),
-                      SvgPicture.asset(
-                        'assets/images/shopping.svg',
-                        placeholderBuilder: (context) =>
-                            CircularProgressIndicator(),
-                        color: Color(0xff686868),
-                        height: 128.0,
+                      Container(
+                        padding: EdgeInsets.only(right:30.0),
+                        //decoration: BoxDecoration(border:Border.all(width:1.0),borderRadius:BorderRadius.circular(20.0)),
+                        child: SvgPicture.asset(
+                            'assets/images/shopping.svg',
+                            placeholderBuilder: (context) =>
+                                CircularProgressIndicator(),
+                            color: Color(0xff686868),
+                            height: 128.0,
+                          ),
                       ),
+                      
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.1),
                       Center(
@@ -135,38 +138,9 @@ class HomeScreen extends StatelessWidget {
                       )),
                     ],
                   )),
-
-            //_buildNewOffer(),
           ],
         ),
       );
     });
   }
-
-  /*Widget _buildProductList(List<Product> products) {
-    Widget productCards;
-    if (products.length > 0) {
-      productCards = Expanded(
-        child: ListView.builder(
-          itemBuilder: (BuildContext context, int index) =>
-              YourOffers(products[index]),
-          itemCount: products.length,
-        ),
-      );
-    } else {
-      productCards = Container(
-        child: Text('null'),
-      );
-    }
-    return productCards;
-  }
-  _buildProductList() {
-    List<Widget> productList = [];
-    allProducts.forEach(
-      (Product product) {
-        productList.add(YourOffers(product));
-      },
-    );
-    return productList;
-  }*/
 }

@@ -5,6 +5,8 @@ import 'package:dob/pages/login/loginscreen.dart';
 import 'package:dob/pages/splashscreen.dart';
 import 'package:dob/scoped-models/products.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'bloc/authentication_bloc/authentication_bloc.dart';
@@ -12,9 +14,11 @@ import 'bloc/authentication_bloc/simple_bloc_delegate.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
+  //debugPaintSizeEnabled=true;
   WidgetsFlutterBinding.ensureInitialized();//he code is executed before runApp.
   BlocSupervisor.delegate = SimpleBlocDelegate();
   final AuthRepository authRepository = AuthRepository();
+  
 
   runApp(
     BlocProvider<AuthenticationBloc>(
@@ -38,6 +42,7 @@ class MyApp extends StatelessWidget {
         super(key: key);
   @override
   Widget build(BuildContext context) {
+    timeDilation = 1.0;
     return ScopedModel<Products>(
       model: model,
       child: MaterialApp(

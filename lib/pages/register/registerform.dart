@@ -150,6 +150,21 @@ class _RegisterFormState extends State<RegisterForm> {
                       });
                     },
                   ),
+                  SizedBox(height: 10.0),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      icon: Icon(Icons.phone),
+                      labelText: 'Phone',
+                    ),
+                    keyboardType: TextInputType.emailAddress,
+                    autocorrect: false,
+                    autovalidate: true,
+                    onChanged: (value) {
+                      setState(() {
+                        url = value;
+                      });
+                    },
+                  ),
                   SizedBox(height: 30.0),
                   RegisterButton(
                     onPressed: isRegisterButtonEnabled(state)

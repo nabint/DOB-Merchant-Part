@@ -16,14 +16,15 @@ class CreateNewOffer extends StatefulWidget {
   _CreateNewOfferState createState() => _CreateNewOfferState();
 }
 
-class _CreateNewOfferState extends State<CreateNewOffer> {
+class _CreateNewOfferState extends State<CreateNewOffer>
+   {
   double get getDeviceWidth => MediaQuery.of(context).size.width;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _titleFocusNode = FocusNode();
   File _image;
   final _descriptionFocusNode = FocusNode();
   final _priceFocusNode = FocusNode();
-
+  
   int days, hours;
   final BasicDateTimeField startingDate = BasicDateTimeField(true);
   final BasicDateTimeField endingDate = BasicDateTimeField(false);
@@ -32,6 +33,8 @@ class _CreateNewOfferState extends State<CreateNewOffer> {
     'description': null,
     'price': null,
   };
+
+  
 
   Widget _buildTitleTextField() {
     return TextFormField(
@@ -168,7 +171,7 @@ class _CreateNewOfferState extends State<CreateNewOffer> {
         Flushbar(
           borderRadius: 8,
           message: "Image Uploaded Sucessfully",
-          duration: Duration(seconds:3),
+          duration: Duration(seconds: 3),
         ).show(context);
       });
     }
@@ -258,113 +261,117 @@ class _CreateNewOfferState extends State<CreateNewOffer> {
           FocusScope.of(context).requestFocus(new FocusNode());
           setState(() {});
         },
-        child: Stack(
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.all(20.0),
-              child: Form(
-                key: _formKey,
-                child: ListView(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: Text(
-                        "Enter the Offer Details",
-                        style: TextStyle(
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.w400,
-                            letterSpacing: 1.2),
-                      ),
-                    ),
-                    SizedBox(height: 30),
-                    _buildTitleTextField(),
-                    _buildDescriptionTextField(),
-                    _buildPriceTextField(),
-                    SizedBox(
-                      height: 40.0,
-                    ),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        width: 180,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                              width: 2.0,
-                              color: Theme.of(context).primaryColor),
-                        ),
-                        child: FlatButton.icon(
-                          onPressed: dialogueBox,
-                          icon: Icon(Icons.photo_camera),
-                          label: Text("Upload an Image"),
+        child: SingleChildScrollView(
+          child: Stack(
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.all(20.0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Text(
+                          "Enter the Offer Details",
+                          style: TextStyle(
+                              fontSize: 24.0,
+                              fontWeight: FontWeight.w400,
+                              letterSpacing: 1.2),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 20),
-                    Text(
-                      "Your Offer Period",
-                      style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 1.2),
-                    ),
-                    SizedBox(height: 10),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: Text(
-                        "From",
+                      SizedBox(height: 30),
+                      _buildTitleTextField(),
+                      _buildDescriptionTextField(),
+                      _buildPriceTextField(),
+                      SizedBox(
+                        height: 40.0,
+                      ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                          width: 180,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                width: 2.0,
+                                color: Theme.of(context).primaryColor),
+                          ),
+                          child: FlatButton.icon(
+                            onPressed: dialogueBox,
+                            icon: Icon(Icons.photo_camera),
+                            label: Text("Upload an Image"),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      Text(
+                        "Your Offer Period",
                         style: TextStyle(
                             fontSize: 16.0,
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w600,
                             letterSpacing: 1.2),
                       ),
-                    ),
-                    SizedBox(height: 10),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: startingDate,
-                    ),
-                    SizedBox(height: 10),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: Text(
-                        "To",
-                        style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.w400,
-                            letterSpacing: 1.2),
+                      SizedBox(height: 10),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Text(
+                          "From",
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w400,
+                              letterSpacing: 1.2),
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: endingDate,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            if (_titleFocusNode.hasFocus ||
-                _priceFocusNode.hasFocus ||
-                _descriptionFocusNode.hasFocus)
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Visibility(
-                  visible: false,
-                  child: _buildsubmitButton(),
-                ),
-              )
-            else
-              Positioned.fill(
-                bottom: 30.0,
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Visibility(
-                    visible: true,
-                    child: _buildsubmitButton(),
+                      SizedBox(height: 10),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: startingDate,
+                      ),
+                      SizedBox(height: 10),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Text(
+                          "To",
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w400,
+                              letterSpacing: 1.2),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: endingDate,
+                      ),
+                       SizedBox(height: 20),
+                      _buildsubmitButton()
+                    ],
                   ),
                 ),
               ),
-          ],
+              // if (_titleFocusNode.hasFocus ||
+              //     _priceFocusNode.hasFocus ||
+              //     _descriptionFocusNode.hasFocus)
+              //   Align(
+              //     alignment: Alignment.bottomCenter,
+              //     child: Visibility(
+              //       visible: false,
+              //       child: _buildsubmitButton(),
+              //     ),
+              //   )
+              // else
+              //   Positioned.fill(
+              //     bottom: 30.0,
+              //     child: Align(
+              //       alignment: Alignment.bottomCenter,
+              //       child: Visibility(
+              //         visible: true,
+              //         child: _buildsubmitButton(),
+              //       ),
+              //     ),
+              //   ),
+            ],
+          ),
         ),
       ),
     );

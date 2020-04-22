@@ -15,16 +15,14 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-          title: Text(
-        'Register',
-        style: TextStyle(color: Colors.black),
-      )),
+      
       body: Center(
         child: BlocProvider<RegisterBloc>(
           create: (context) => RegisterBloc(authRepository: _authRepository),
-          child: RegisterForm(),
+          child: Padding(
+            padding: const EdgeInsets.only(top:20.0),
+            child: RegisterForm(),
+          ),
         ),
       ),
     );

@@ -1,21 +1,26 @@
 import 'package:dob/data/model/product_model.dart';
 import 'package:dob/pages/productdetail.dart';
+import 'package:dob/widgets/navigationeffects.dart';
 import 'package:flutter/material.dart';
 
-class YourOffers extends StatelessWidget {
+class YourOffers extends StatefulWidget {
   final Product product;
   YourOffers(this.product);
+  @override
+  _YourOffersState createState() => _YourOffersState();
+}
+
+class _YourOffersState extends State<YourOffers> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (_) => ProductDetail(
-              product: product,
-            ),
-          ),
+          ScaleRoute(
+              page: ProductDetail(
+            product: widget.product,
+          )),
         )
       },
       child: Container(
@@ -31,15 +36,13 @@ class YourOffers extends StatelessWidget {
         child: Row(
           children: <Widget>[
             ClipRRect(
-              borderRadius: BorderRadius.circular(15.0),
-              child: Hero(
-                tag: product.description, //this needs to be changed
-                child: Image(
-                  image: FileImage(product.image),
-                  height: 150.0,
-                  width: 150.0,
-                  fit: BoxFit.cover,
-                ),
+              borderRadius: BorderRadius.circular(10.0),
+              //this needs to be changed
+              child: Image(
+                image: FileImage(widget.product.image),
+                height: 150.0,
+                width: 150.0,
+                fit: BoxFit.cover,
               ),
             ),
             Expanded(
@@ -50,7 +53,7 @@ class YourOffers extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      product.title,
+                      widget.product.title,
                       style: TextStyle(
                           fontSize: 16.0, fontWeight: FontWeight.bold),
                       overflow: TextOverflow.ellipsis,
@@ -59,7 +62,7 @@ class YourOffers extends StatelessWidget {
                       height: 4.0,
                     ),
                     Text(
-                      product.description,
+                      widget.product.description,
                       maxLines: 1,
                       style: TextStyle(
                           fontSize: 12.0, fontWeight: FontWeight.w600),
@@ -69,7 +72,7 @@ class YourOffers extends StatelessWidget {
                       height: 4.0,
                     ),
                     Text(
-                      '${product.days} days ${product.hours} hours Remaining',
+                      '${widget.product.days} days ${widget.product.hours} hours Remaining',
                       style: TextStyle(
                           fontSize: 12.0, fontWeight: FontWeight.w600),
                       overflow: TextOverflow.ellipsis,
@@ -87,3 +90,5 @@ class YourOffers extends StatelessWidget {
     );
   }
 }
+
+
