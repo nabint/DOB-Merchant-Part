@@ -4,6 +4,7 @@ import 'package:dob/pages/homescreen.dart';
 import 'package:dob/pages/login/loginscreen.dart';
 import 'package:dob/pages/splashscreen.dart';
 import 'package:dob/scoped-models/products.dart';
+import 'package:dob/widgets/phone_auth_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
@@ -15,10 +16,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   //debugPaintSizeEnabled=true;
-  WidgetsFlutterBinding.ensureInitialized();//he code is executed before runApp.
+  WidgetsFlutterBinding
+      .ensureInitialized(); //he code is executed before runApp.
   BlocSupervisor.delegate = SimpleBlocDelegate();
   final AuthRepository authRepository = AuthRepository();
-  
 
   runApp(
     BlocProvider<AuthenticationBloc>(
@@ -52,7 +53,6 @@ class MyApp extends StatelessWidget {
         ],
         supportedLocales: [
           const Locale('en', 'US'), // English
-
         ],
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
@@ -68,6 +68,7 @@ class MyApp extends StatelessWidget {
               return LoginScreen(authRepository: _authRepository);
             } else if (state is Authenticated) {
               print("Main Authenticated");
+              // return PhoneAuthScreen();
               return HomeScreen(
                 userEmail: state.user,
               );

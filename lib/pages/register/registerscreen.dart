@@ -21,7 +21,7 @@ class RegisterScreen extends StatelessWidget {
           create: (context) => RegisterBloc(authRepository: _authRepository),
           child: Padding(
             padding: const EdgeInsets.only(top:20.0),
-            child: RegisterForm(),
+            child: RegisterForm(_authRepository),
           ),
         ),
       ),

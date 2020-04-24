@@ -2,20 +2,14 @@ import 'package:flutter/material.dart';
 
 class RegisterButton extends StatelessWidget {
   final VoidCallback _onPressed;
-
-  RegisterButton({Key key, VoidCallback onPressed})
+  final String _buttonText;
+  RegisterButton({Key key, VoidCallback onPressed,String buttonText})
       : _onPressed = onPressed,
+        _buttonText = buttonText,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    //   return RaisedButton(
-    //     shape: RoundedRectangleBorder(
-    //       borderRadius: BorderRadius.circular(30.0),
-    //     ),
-    //     onPressed: _onPressed,
-    //     child: Text('Register'),
-    //   );
     return _buildregisterButton();
   }
 
@@ -30,7 +24,7 @@ class RegisterButton extends StatelessWidget {
         child: FlatButton(
           onPressed: _onPressed,
           child: Text(
-            "Sign Up",
+            _buttonText,
             style: TextStyle(color: Colors.white,fontSize: 18.0),
           ),
         ),

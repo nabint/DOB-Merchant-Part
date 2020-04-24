@@ -1,12 +1,10 @@
 import 'dart:io';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:dob/scoped-models/products.dart';
 import 'package:dob/widgets/date_time_field.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
 
 class CreateNewOffer extends StatefulWidget {
   // final Product product;
@@ -16,15 +14,14 @@ class CreateNewOffer extends StatefulWidget {
   _CreateNewOfferState createState() => _CreateNewOfferState();
 }
 
-class _CreateNewOfferState extends State<CreateNewOffer>
-   {
+class _CreateNewOfferState extends State<CreateNewOffer> {
   double get getDeviceWidth => MediaQuery.of(context).size.width;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _titleFocusNode = FocusNode();
   File _image;
   final _descriptionFocusNode = FocusNode();
   final _priceFocusNode = FocusNode();
-  
+
   int days, hours;
   final BasicDateTimeField startingDate = BasicDateTimeField(true);
   final BasicDateTimeField endingDate = BasicDateTimeField(false);
@@ -33,8 +30,6 @@ class _CreateNewOfferState extends State<CreateNewOffer>
     'description': null,
     'price': null,
   };
-
-  
 
   Widget _buildTitleTextField() {
     return TextFormField(
@@ -160,6 +155,13 @@ class _CreateNewOfferState extends State<CreateNewOffer>
       setState(() {
         _image = image;
         Navigator.pop(context);
+        _image != null
+            ? Flushbar(
+                borderRadius: 8,
+                message: "Image Uploaded Sucessfully",
+                duration: Duration(seconds: 3),
+              ).show(context)
+            : null;
       });
     }
 
@@ -168,11 +170,13 @@ class _CreateNewOfferState extends State<CreateNewOffer>
       setState(() {
         _image = image;
         Navigator.pop(context);
-        Flushbar(
-          borderRadius: 8,
-          message: "Image Uploaded Sucessfully",
-          duration: Duration(seconds: 3),
-        ).show(context);
+        _image != null
+            ? Flushbar(
+                borderRadius: 8,
+                message: "Image Uploaded Sucessfully",
+                duration: Duration(seconds: 3),
+              ).show(context)
+            : null;
       });
     }
 
@@ -343,7 +347,7 @@ class _CreateNewOfferState extends State<CreateNewOffer>
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: endingDate,
                       ),
-                       SizedBox(height: 20),
+                      SizedBox(height: 20),
                       _buildsubmitButton()
                     ],
                   ),
