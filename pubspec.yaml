@@ -40,6 +40,10 @@ dependencies:
   flushbar: 1.6.0
   cached_network_image: ^2.1.0+1
   flutter_svg: ^0.17.4
+  pin_code_fields: ^3.0.0
+  flutter_verification_code_input:
+    git:
+      url: git://github.com/tinylife-io/flutter_verification_code_input.git
 
 dev_dependencies:
   flutter_test:

@@ -219,6 +219,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.6"
+  flutter_verification_code_input:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "77b8fa5eba87db88b0841e802282b36e9a33174f"
+      url: "git://github.com/tinylife-io/flutter_verification_code_input.git"
+    source: git
+    version: "0.1.2"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -371,6 +380,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.0"
+  pin_code_fields:
+    dependency: "direct main"
+    description:
+      name: pin_code_fields
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.0"
   platform:
     dependency: transitive
     description:

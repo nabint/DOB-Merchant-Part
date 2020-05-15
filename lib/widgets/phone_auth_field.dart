@@ -1,6 +1,6 @@
 import 'package:dob/data/AuthRepository.dart';
-import 'package:dob/pages/register/registerform.dart';
 import 'package:dob/pages/signupdetails.dart';
+import 'package:dob/widgets/phone_verification.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -9,10 +9,12 @@ class PhoneAuthScreen {
   final _codeController = TextEditingController();
   final AuthRepository authRepository;
   final String email, password, phoneNum;
-  PhoneAuthScreen({this.email, this.password, this.phoneNum,this.authRepository});
+  PhoneAuthScreen(
+      {this.email, this.password, this.phoneNum, this.authRepository});
 
   Future<dynamic> loginUser(String phone, BuildContext context) async {
     FirebaseAuth _auth = FirebaseAuth.instance;
+    
     await _auth.verifyPhoneNumber(
         phoneNumber: phone,
         timeout: Duration(seconds: 60),
@@ -28,6 +30,7 @@ class PhoneAuthScreen {
               MaterialPageRoute(
                   builder: (context) =>
                       SignUpDetails(email:email, password:password, phoneNum:phoneNum,authRepository:authRepository)),
+                      //PhoneVerificationPage(phoneNum)),
             );
           } else {
             print("Error");
@@ -36,52 +39,17 @@ class PhoneAuthScreen {
         verificationFailed: (AuthException exception) {
           print(exception);
         },
+       
         codeSent: (String verificationId, [int forceResendingToken]) {
-          showDialog(
-              context: context,
-              barrierDismissible: false,
-              builder: (context) {
-                return AlertDialog(
-                  title: Text("Enter the Verification code:"),
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      TextField(
-                        controller: _codeController,
-                      ),
-                    ],
-                  ),
-                  actions: <Widget>[
-                    FlatButton(
-                      child: Text("Confirm"),
-                      textColor: Colors.white,
-                      color: Colors.blue,
-                      onPressed: () async {
-                        final code = _codeController.text.trim();
-                        AuthCredential credential =
-                            PhoneAuthProvider.getCredential(
-                                verificationId: verificationId, smsCode: code);
-
-                        AuthResult result =
-                            await _auth.signInWithCredential(credential);
-
-                        FirebaseUser user = result.user;
-
-                        if (user != null) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SignUpDetails()),
-                          );
-                        } else {
-                          // Scaffold.of(context).showSnackBar(SnackBar)
-                        }
-                      },
-                    )
-                  ],
-                );
-              });
+          
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    PhoneVerificationPage(email: email,phoneNo: phone,password: password,authRepository: authRepository,verificationId: verificationId,token:forceResendingToken)),
+          );
         },
+
         codeAutoRetrievalTimeout: null);
   }
 

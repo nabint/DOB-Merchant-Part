@@ -2,7 +2,6 @@ import 'package:dob/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:dob/bloc/register_bloc/register_bloc.dart';
 import 'package:dob/data/AuthRepository.dart';
 import 'package:dob/widgets/phone_auth_field.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import '../../bloc/register_bloc/register_event.dart';
 import 'package:dob/bloc/register_bloc/register_state.dart';
 import 'package:dob/pages/register/registerbutton.dart';
@@ -22,6 +21,8 @@ class _RegisterFormState extends State<RegisterForm> {
   String name, url, address, phoneNum;
   RegisterBloc _registerBloc;
   bool _isloading = false;
+  bool _autoValidate = false;
+  final _formKey = GlobalKey<FormState>();
 
   bool get isPopulated =>
       _emailController.text.isNotEmpty && _passwordController.text.isNotEmpty;
@@ -87,6 +88,8 @@ class _RegisterFormState extends State<RegisterForm> {
                 return Padding(
                   padding: EdgeInsets.all(20),
                   child: Form(
+                    autovalidate: _autoValidate,
+                    key: _formKey,
                     child: ListView(
                       children: <Widget>[
                         SizedBox(height: 10.0),
@@ -98,7 +101,7 @@ class _RegisterFormState extends State<RegisterForm> {
                           ),
                           keyboardType: TextInputType.emailAddress,
                           autocorrect: false,
-                          autovalidate: true,
+                          autovalidate: false,
                           validator: (_) {
                             return !state.isEmailValid ? 'Invalid Email' : null;
                           },
@@ -109,10 +112,12 @@ class _RegisterFormState extends State<RegisterForm> {
                           decoration: InputDecoration(
                             icon: Icon(Icons.lock),
                             labelText: 'Password',
+                            helperText: "Should be over 8 character and contain number"
                           ),
                           obscureText: true,
                           autocorrect: false,
-                          autovalidate: true,
+                          autovalidate: false,
+                        
                           validator: (_) {
                             return !state.isPasswordValid
                                 ? 'Invalid Password'
@@ -127,11 +132,11 @@ class _RegisterFormState extends State<RegisterForm> {
                           ),
                           obscureText: true,
                           autocorrect: false,
-                          autovalidate: true,
+                          autovalidate: false,
                           validator: (val) {
                             if (val.isEmpty) return 'Empty';
                             if (val != _passwordController.text)
-                              return 'Not Match';
+                              return 'Passwords Don\'t Match';
                             return null;
                           },
                         ),
@@ -145,12 +150,18 @@ class _RegisterFormState extends State<RegisterForm> {
                           controller: _phoneController,
                           keyboardType: TextInputType.number,
                           autocorrect: false,
-                          autovalidate: true,
+                          autovalidate: false,
                           onChanged: (value) {
                             setState(() {
                               phoneNum = '+977' +
                                   _phoneController.text.toString().trim();
                             });
+                          },
+                          validator: (value) {
+                            if (value.length != 10) {
+                              return 'Please Enter Valid PhoneNumber';
+                            }
+                            return null;
                           },
                         ),
                         SizedBox(height: 30.0),
@@ -159,13 +170,21 @@ class _RegisterFormState extends State<RegisterForm> {
                           // onPressed: isRegisterButtonEnabled(state)
                           //     ? _onFormSubmitted
                           //     : null,
-                          onPressed: () async {
-                            phonelogin(
-                                _emailController.text,
-                                _passwordController.text,
-                                _phoneController.text.toString(),
-                                widget._authRepository);
-                                
+                          onPressed: (){
+                            if (_formKey.currentState.validate()) {
+                              phonelogin(
+                                  _emailController.text,
+                                  _passwordController.text,
+                                  _phoneController.text.toString(),
+                                  widget._authRepository);
+                            }
+
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //       builder: (context) =>
+                            //           PhoneVerificationPage(phoneNum)),
+                            // );
                           },
                         ),
                       ],
@@ -177,12 +196,15 @@ class _RegisterFormState extends State<RegisterForm> {
           );
   }
 
-  void phonelogin(String email, String password, String phonenum,AuthRepository authRepository) async {
-    // setState(() {
-    //   _isloading = true;
-    //   print('True');
-    // });
-    await PhoneAuthScreen(email: email,password: password,phoneNum: phonenum,authRepository:authRepository).loginUser(phoneNum, context);
+  void phonelogin(String email, String password, String phonenum,
+      AuthRepository authRepository) async {
+
+    await PhoneAuthScreen(
+            email: email,
+            password: password,
+            phoneNum: phonenum,
+            authRepository: authRepository)
+        .loginUser(phoneNum, context);
 
 //     Future.delayed(const Duration(seconds: 4), () {
 //       setState(() {
