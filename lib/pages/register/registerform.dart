@@ -1,6 +1,6 @@
-import 'package:dob/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:dob/bloc/register_bloc/register_bloc.dart';
 import 'package:dob/data/AuthRepository.dart';
+import 'package:dob/pages/signupdetails.dart';
 import 'package:dob/widgets/phone_auth_field.dart';
 import '../../bloc/register_bloc/register_event.dart';
 import 'package:dob/bloc/register_bloc/register_state.dart';
@@ -46,54 +46,24 @@ class _RegisterFormState extends State<RegisterForm> {
             child: CircularProgressIndicator(),
           )
         : BlocListener<RegisterBloc, RegisterState>(
-            listener: (context, state) {
-              if (state.isSubmitting) {
-                Scaffold.of(context)
-                  ..hideCurrentSnackBar()
-                  ..showSnackBar(
-                    SnackBar(
-                      content: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Registering...'),
-                          CircularProgressIndicator(),
-                        ],
-                      ),
-                    ),
-                  );
-              }
-              if (state.isSuccess) {
-                BlocProvider.of<AuthenticationBloc>(context).add(LoggedIn());
-                Navigator.of(context).pop();
-              }
-              if (state.isFailure) {
-                Scaffold.of(context)
-                  ..hideCurrentSnackBar()
-                  ..showSnackBar(
-                    SnackBar(
-                      content: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Registration Failure'),
-                          Icon(Icons.error),
-                        ],
-                      ),
-                      backgroundColor: Colors.red,
-                    ),
-                  );
-              }
-            },
+            listener: (context, state) {},
             child: BlocBuilder<RegisterBloc, RegisterState>(
               builder: (context, state) {
-                return Padding(
-                  padding: EdgeInsets.all(20),
-                  child: Form(
-                    autovalidate: _autoValidate,
-                    key: _formKey,
-                    child: ListView(
-                      children: <Widget>[
-                        SizedBox(height: 10.0),
-                        TextFormField(
+                return Form(
+                  autovalidate: _autoValidate,
+                  key: _formKey,
+                  child: ListView(
+                    children: <Widget>[
+                      Center(
+                        child: Text(
+                          "User Sign Up",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ),
+                      SizedBox(height: 10.0),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: TextFormField(
                           controller: _emailController,
                           decoration: InputDecoration(
                             icon: Icon(Icons.email),
@@ -106,26 +76,31 @@ class _RegisterFormState extends State<RegisterForm> {
                             return !state.isEmailValid ? 'Invalid Email' : null;
                           },
                         ),
-                        SizedBox(height: 10.0),
-                        TextFormField(
+                      ),
+                      SizedBox(height: 10.0),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: TextFormField(
                           controller: _passwordController,
                           decoration: InputDecoration(
-                            icon: Icon(Icons.lock),
-                            labelText: 'Password',
-                            helperText: "Should be over 8 character and contain number"
-                          ),
+                              icon: Icon(Icons.lock),
+                              labelText: 'Password',
+                              helperText:
+                                  "Should be over 8 character and contain number"),
                           obscureText: true,
                           autocorrect: false,
                           autovalidate: false,
-                        
                           validator: (_) {
                             return !state.isPasswordValid
                                 ? 'Invalid Password'
                                 : null;
                           },
                         ),
-                        SizedBox(height: 10.0),
-                        TextFormField(
+                      ),
+                      SizedBox(height: 10.0),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: TextFormField(
                           decoration: InputDecoration(
                             icon: Icon(Icons.lock),
                             labelText: 'Confirm Password ',
@@ -140,8 +115,11 @@ class _RegisterFormState extends State<RegisterForm> {
                             return null;
                           },
                         ),
-                        SizedBox(height: 10.0),
-                        TextFormField(
+                      ),
+                      SizedBox(height: 10.0),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: TextFormField(
                           decoration: InputDecoration(
                             icon: Icon(Icons.phone),
                             labelText: 'Phone',
@@ -164,31 +142,43 @@ class _RegisterFormState extends State<RegisterForm> {
                             return null;
                           },
                         ),
-                        SizedBox(height: 30.0),
-                        RegisterButton(
-                          buttonText: 'Verify Your Phone Number',
-                          // onPressed: isRegisterButtonEnabled(state)
-                          //     ? _onFormSubmitted
-                          //     : null,
-                          onPressed: (){
-                            if (_formKey.currentState.validate()) {
-                              phonelogin(
-                                  _emailController.text,
-                                  _passwordController.text,
-                                  _phoneController.text.toString(),
-                                  widget._authRepository);
-                            }
-
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //       builder: (context) =>
-                            //           PhoneVerificationPage(phoneNum)),
-                            // );
-                          },
+                      ),
+                      SizedBox(height: 30.0),
+                      Align(
+                        child: Container(
+                          width: 270,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  width: 1.5, color: Color(0xff6E012A)),
+                              borderRadius: BorderRadius.circular(20)),
+                          child: FlatButton(
+                            onPressed: () {
+                              // if (_formKey.currentState.validate()) {
+                              //   phonelogin(
+                              //       _emailController.text,
+                              //       _passwordController.text,
+                              //       _phoneController.text.toString(),
+                              //       widget._authRepository);
+                              // }
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SignUpDetails(
+                                          authRepository:
+                                              widget._authRepository,
+                                        )),
+                              );
+                            },
+                            child: Text(
+                              'Verify Your Phone Number',
+                              style: TextStyle(
+                                  color: Color(0xff6E012A), fontSize: 18.0),
+                            ),
+                          ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 );
               },
@@ -198,20 +188,22 @@ class _RegisterFormState extends State<RegisterForm> {
 
   void phonelogin(String email, String password, String phonenum,
       AuthRepository authRepository) async {
-
+    setState(() {
+      _isloading = true;
+      print('True');
+    });
     await PhoneAuthScreen(
             email: email,
             password: password,
             phoneNum: phonenum,
             authRepository: authRepository)
         .loginUser(phoneNum, context);
-
-//     Future.delayed(const Duration(seconds: 4), () {
-//       setState(() {
-//         _isloading = false;
-//         print('False');
-//       });
-//     });
+    Future.delayed(const Duration(seconds: 4), () {
+      setState(() {
+        _isloading = false;
+        print('False');
+      });
+    });
   }
 
   @override
@@ -230,18 +222,6 @@ class _RegisterFormState extends State<RegisterForm> {
   void _onPasswordChanged() {
     _registerBloc.add(
       PasswordChanged(password: _passwordController.text),
-    );
-  }
-
-  void _onFormSubmitted() {
-    _registerBloc.add(
-      Submitted(
-        email: _emailController.text,
-        password: _passwordController.text,
-        name: name,
-        address: address,
-        url: url,
-      ),
     );
   }
 }

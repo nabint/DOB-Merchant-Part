@@ -25,7 +25,7 @@ class PhoneAuthScreen {
 
           if (user != null) {
             print("Verified");
-            Navigator.push(
+            Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                   builder: (context) =>
@@ -42,7 +42,7 @@ class PhoneAuthScreen {
        
         codeSent: (String verificationId, [int forceResendingToken]) {
           
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(
                 builder: (context) =>

@@ -1,50 +1,42 @@
 {
   "project_info": {
-    "project_number": "882869104081",
-    "firebase_url": "https://deals-on-bills-9d22a.firebaseio.com",
-    "project_id": "deals-on-bills-9d22a",
-    "storage_bucket": "deals-on-bills-9d22a.appspot.com"
+    "project_number": "942169859640",
+    "firebase_url": "https://deals-on-bills-e34b9.firebaseio.com",
+    "project_id": "deals-on-bills-e34b9",
+    "storage_bucket": "deals-on-bills-e34b9.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:882869104081:android:f878d00c181613481144f0",
+        "mobilesdk_app_id": "1:942169859640:android:57f8cb63e0bafbc216e8cd",
         "android_client_info": {
-          "package_name": "com.halo.deals_on_bills"
+          "package_name": "com.example.dob"
         }
       },
       "oauth_client": [
         {
-          "client_id": "882869104081-ml5c1f7brgutal7jc6lfvvoeoqa0e5h3.apps.googleusercontent.com",
+          "client_id": "942169859640-e93eifpbdpo41sn6t83aa72h0bjapas1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.halo.deals_on_bills",
-            "certificate_hash": "f22d2f47f630c2b19bf2775e58949d9d1ff831b5"
+            "package_name": "com.example.dob",
+            "certificate_hash": "882d2db2b7910171d01c5d5f5079a93347f337b8"
           }
         },
         {
-          "client_id": "882869104081-5nek2t4ile1v0oldlbaj2l5k4snttk7h.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.halo.deals_on_bills",
-            "certificate_hash": "30e98918fe74cc9cf5c31dbabf563a4a2026ce3a"
-          }
-        },
-        {
-          "client_id": "882869104081-aghr4dd8acnqvqb2q6v3hprbr6nr955j.apps.googleusercontent.com",
+          "client_id": "942169859640-omv2eeauf0ai70p6dudtnr92cpdmkavc.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDcZpp8fy79mshm10MyiQ4YKQ9C0iveDug"
+          "current_key": "AIzaSyCL5JDZ5S-gjjbIXxKvvQx7tpoLFrCbl3M"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "882869104081-aghr4dd8acnqvqb2q6v3hprbr6nr955j.apps.googleusercontent.com",
+              "client_id": "942169859640-omv2eeauf0ai70p6dudtnr92cpdmkavc.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

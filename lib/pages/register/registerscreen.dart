@@ -15,7 +15,7 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+      backgroundColor: Colors.white,
       body: Center(
         child: BlocProvider<RegisterBloc>(
           create: (context) => RegisterBloc(authRepository: _authRepository),

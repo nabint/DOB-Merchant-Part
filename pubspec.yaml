@@ -41,6 +41,12 @@ dependencies:
   cached_network_image: ^2.1.0+1
   flutter_svg: ^0.17.4
   pin_code_fields: ^3.0.0
+  geolocator: ^5.1.5
+  flutter_google_places: ^0.2.3
+  google_maps_webservice: ^0.0.16
+  google_maps_flutter: ^0.5.11
+  location: ^3.0.2
+  geocoder: ^0.2.1
   flutter_verification_code_input:
     git:
       url: git://github.com/tinylife-io/flutter_verification_code_input.git

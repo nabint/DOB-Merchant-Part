@@ -12,7 +12,8 @@ import 'package:image_picker/image_picker.dart';
 class SignUpDetails extends StatefulWidget {
   final String email, password, phoneNum;
   final AuthRepository authRepository;
-  SignUpDetails({this.email, this.password, this.phoneNum,this.authRepository});
+  SignUpDetails(
+      {this.email, this.password, this.phoneNum, this.authRepository});
   @override
   _SignUpDetailsState createState() => _SignUpDetailsState();
 }
@@ -63,7 +64,7 @@ class _SignUpDetailsState extends State<SignUpDetails> {
     return Scaffold(
       floatingActionButton: FlatButton.icon(
         onPressed: () {
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(
                 builder: (context) => BlocProvider<RegisterBloc>(
@@ -84,6 +85,13 @@ class _SignUpDetailsState extends State<SignUpDetails> {
         child: Form(
           child: ListView(
             children: <Widget>[
+              Center(
+                child: Text(
+                  "Merchant Details",
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+              SizedBox(height: 20),
               TextFormField(
                 decoration: InputDecoration(
                   icon: Icon(Icons.person),
@@ -143,14 +151,15 @@ class _SignUpDetailsState extends State<SignUpDetails> {
                       SizedBox(
                         height: 15.0,
                       ),
-                      Text('Selected: ${_selectedCategory.name}'),
-                      SizedBox(
-                        height: 15.0,
-                      ),
+                      // Text('Selected: ${_selectedCategory.name}'),
+                      // SizedBox(
+                      //   height: 15.0,
+                      // ),
                       Container(
                         width: 180,
                         height: 50,
                         decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.0),
                           border: Border.all(
                               width: 2.0,
                               color: Theme.of(context).primaryColor),
